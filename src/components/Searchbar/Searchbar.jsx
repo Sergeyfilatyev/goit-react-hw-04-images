@@ -44,7 +44,6 @@ export default function SearchBar({ onSubmit }) {
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
-
 // class SearchBar extends Component {
 //   state = {
 //     imageName: '',
