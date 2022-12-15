@@ -38,26 +38,23 @@ export default function App() {
       return;
     }
     setStatus(Status.PENDING);
-    const renderImages = () => {
-      fetchImage(imageName, page)
-        .then(response => {
-          if (response.hits.length === 0) {
-            toast.warning(
-              `No images ${imageName} your search query. Please try again.`
-            );
-            setStatus(Status.IDLE);
-            return;
-          }
-          setImages(prevImages => [...prevImages, ...response.hits]);
-          setTotalPages(Math.ceil(response.totalHits / 12));
-          setStatus(Status.RESOLVED);
-        })
-        .catch(error => {
-          setError(error);
-          setStatus(Status.REJECTED);
-        });
-    };
-    renderImages();
+    fetchImage(imageName, page)
+      .then(response => {
+        if (response.hits.length === 0) {
+          toast.warning(
+            `No images ${imageName} your search query. Please try again.`
+          );
+          setStatus(Status.IDLE);
+          return;
+        }
+        setImages(prevImages => [...prevImages, ...response.hits]);
+        setTotalPages(Math.ceil(response.totalHits / 12));
+        setStatus(Status.RESOLVED);
+      })
+      .catch(error => {
+        setError(error);
+        setStatus(Status.REJECTED);
+      });
   }, [imageName, page]);
   const nextPages = () => {
     setPage(prevPage => prevPage + 1);
