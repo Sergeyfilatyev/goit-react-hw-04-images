@@ -32,13 +32,14 @@ export default function App() {
     setPage(1);
     setImages([]);
   };
+
   useEffect(() => {
     if (!imageName) {
       return;
     }
     setStatus(Status.PENDING);
     renderImages();
-  }, [page, imageName]);
+  }, [imageName, page]);
 
   const renderImages = () => {
     fetchImage(imageName, page)
@@ -59,6 +60,7 @@ export default function App() {
         setStatus(Status.REJECTED);
       });
   };
+
   const nextPages = () => {
     setPage(prevPage => prevPage + 1);
     scroll.scrollToBottom();
